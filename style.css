@@ -1,0 +1,42 @@
+
+
+.titulo-main {
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 3em;
+    color:rgb(36, 11, 175);
+    background-color: rgb(211, 10, 211);
+    padding: 65px;
+    border-radius: 50px;
+}
+
+.fila {
+    display: grid;
+    grid-template-columns: 10% 50% 20% 10% 10%;
+    border-bottom: 2px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+}
+
+.titulos {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+.icono-basurero,
+.icono-agregar-tarea {
+    cursor: pointer;
+}
+
+.agregar-tarea-contenedor {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-agregar-tarea {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
