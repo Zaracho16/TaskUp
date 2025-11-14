@@ -1,61 +1,45 @@
 
 const botonAgregar = document.getElementById('idAgregarTarea');
-const contenedor = document.querySelector('#contenedor-filas');
+const contenedor = document.getElementById('contenedor-filas');
 
-let contador = 1;
+let contadorFila = 1;
 
 botonAgregar.addEventListener('click', () => {
 
-    const fila = document.createElement('div');
-    fila.classList.add('fila');
+    const nuevaFila = document.createElement('div');
+    nuevaFila.classList.add('fila');
 
-    // creacion de numero de tarea (autoincrementado)
-    const nro = document.createElement('div');
-    nro.textContent = contador++;
+    nuevaFila.innerHTML = 
+    `
+        <div>${contadorFila}</div>
+        <input type="text">
+        <input type="text">
+        <div><input type="checkbox"></div>
+        <div>
+            <img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/trash--v1.png" class="icono-basurero" alt="trash--v1"/>
+        </div> 
+    `;
 
-    // creacion de la descripcion
-    const inputDesc = document.createElement('input');
-    inputDesc.type = 'text';
+    contadorFila++;
 
-    // creacion de la nota
-    const inputNota = document.createElement('input');
-    inputNota.type = 'text';
-    
-    const divEstado = document.createElement('div');
-    const check = document.createElement('input');
-    check.type = 'checkbox';
-    divEstado.appendChild(check);
+    contenedor.appendChild(nuevaFila);
 
-    const divBasura = document.createElement('div');
-    const imgBasura = document.createElement('img');
-    imgBasura.src = "https://img.icons8.com/material/24/FA5252/trash--v1.png";
-    imgBasura.width = 24;
-    imgBasura.height = 24;
-    imgBasura.classList.add('icono-basurero');
-    imgBasura.style.cursor = 'pointer';
+    contenedor.style.display = 'grid';
 
-    // evento para eliminar la fila
-    imgBasura.addEventListener ('click', () => {
-        fila.remove();
-        actualizarNumeros();
+    const iconoBasurero = nuevaFila.querySelector('.icono-basurero');
+    iconoBasurero.addEventListener('click', () => {
+        nuevaFila.remove();
+        renumerarFilas();
     });
-
-    divBasura.appendChild(imgBasura);
-
-    fila.appendChild(nro);
-    fila.appendChild(inputDesc);
-    fila.appendChild(inputNota);
-    fila.appendChild(divEstado);
-    fila.appendChild(divBasura);
-
-    // Insertar fila al contenedor
-    contenedor.appendChild(fila);
 
 });
 
-function actualizarNumeros() {
-    const filas = contenedor.querySelectorAll('.fila');
-    let i = 1;
-    filas.forEach(fila => fila.children[0].textContent = i++);
-    contador = i;
-}
+function renumerarFilas() {
+
+    const filass = contenedor.querySelectorAll('.fila');
+
+    filass.forEach((fila, index) => {
+        fila.children[0].textContent = index+1;
+    });
+    contadorFila = filass.length + 1;
+};

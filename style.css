@@ -40,3 +40,7 @@
 .text-agregar-tarea {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+#contenedor-filas {
+    display: none;
+}
