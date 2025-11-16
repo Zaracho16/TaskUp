@@ -14,7 +14,7 @@ botonAgregar.addEventListener('click', () => {
         <div>${contadorFila}</div>
         <input type="text" class="desc-fila">
         <input type="text" class="nota-fila">
-        <input type="checkbox" class="check-lista">
+        <input type="checkbox" class="check-lista" id="idCheck">
         <div>
             <img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/trash--v1.png" class="icono-basurero" alt="trash--v1"/>
         </div> 
@@ -23,6 +23,28 @@ botonAgregar.addEventListener('click', () => {
     contadorFila++;
 
     contenedor.appendChild(nuevaFila);
+
+    // funcionalidades al marcar el checkbox en la lista
+    const checkbox = nuevaFila.querySelector('.check-lista');
+
+    const mensajeeCheck = document.getElementById('mensajeCheck');
+
+    let timeOutMensaje;
+    checkbox.addEventListener('change', () => {
+
+    clearTimeout(timeOutMensaje);
+
+    if(checkbox.checked) {
+
+        mensajeeCheck.style.display = 'block';
+        timeOutMensaje = setTimeout(() => {
+            mensajeeCheck.style.display = 'none';
+        }, 1000);
+    } else {
+        mensajeeCheck.style.display = 'none';
+    }
+
+});
 
     contenedor.style.display = 'grid';
 

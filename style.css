@@ -1,18 +1,21 @@
 
+body {
+    background-color: #faf7fc;
+}
 
 .titulo-main {
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 3em;
-    color:rgb(3, 41, 207);
-    background-color: rgb(14, 215, 230);
+    color:rgb(112, 15, 107);
+    background-color: #f3d8ff;
     padding: 65px;
     border-radius: 50px;
 }
 
 .fila {
     display: grid;
-    grid-template-columns: 10% 50% 20% 10% 10%;
+    grid-template-columns: 10% 50% 30% 5% 5%;
     border-bottom: 2px solid #ccc;
     padding: 10px;
     text-align: center;
@@ -46,17 +49,44 @@
 }
 
 /* Diseño para las filas */
-.desc-fila {
+input.desc-fila {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid rebeccapurple;
     border-radius: 40px;
-    border-color: rebeccapurple;
+    padding: 6px 10px; 
     width: 90%;
 }
 
-.nota-fila {
+input.nota-fila {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid rebeccapurple;
     border-radius: 40px;
-    border-color: rebeccapurple;
+    padding: 6px 10px; 
 }
 
 .check-lista {
-    border-color: rebeccapurple;
+    accent-color: rebeccapurple;
 }
+
+/* Diseño mensaje para cuando se marque el checkbox */
+
+.cMensajeCheck {
+    background-color: #34df5c;
+    padding: 6px;
+    width: 8.6rem;
+    text-align: center;
+    border-radius: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70%vh;
+    position: fixed;
+    z-index: 400;
+    transition: opacity 0.3s ease-in-out;
+}
+
+
