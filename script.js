@@ -2,6 +2,38 @@
 const botonAgregar = document.getElementById('idAgregarTarea');
 const contenedor = document.getElementById('contenedor-filas');
 
+/* Generar los grupos dinamicamente */
+
+let grupos = ["universidad", "trabajo", "personal"];
+let grupoActual = null;
+
+const gruposContenedor = document.getElementById('gruposContenedor');
+const seccionTareas = document.getElementById('seccionTareas');
+
+function renderizarGrupos() {
+    gruposContenedor.innerHTML = "";
+    grupos.forEach(grupo => {
+        const card = document.createElement("div");
+        card.classList.add("grupo-card");
+        card.dataset.grupo = grupo;
+        card.innerHTML = `<h3>${grupo}</h3>`
+        card.addEventListener("click", () => seleccionarGrupo(grupo));
+        gruposContenedor.appendChild(card);
+    });
+}
+
+function seleccionarGrupo(grupo) {
+    grupoActual = grupo;
+    
+    const tituloGrupoActual = document.getElementById("tituloGrupoTareas");
+     tituloGrupoActual.textContent = `${grupo.charAt(0).toUpperCase() + grupo.slice(1)} Lista`;
+
+    gruposContenedor.style.display = "none";
+    seccionTareas.style.display = "block";
+    cargarDesdeLocal();
+}
+
+
 let contadorFila = 1;
 
 cargarDesdeLocal();
@@ -79,15 +111,14 @@ function guardarEnLocal() {
             completado: fila.querySelector('.check-lista').checked
         });
     });
-    localStorage.setItem('tareas', JSON.stringify(filas));
+    localStorage.setItem(`tareas_${grupoActual}`, JSON.stringify(filas));
 }
 
 function cargarDesdeLocal() {
-    const data = JSON.parse(localStorage.getItem('tareas')) || [];
-    data.forEach(item => {
-        crearFila(item);
-        contadorFila = Math.max(contadorFila, parseInt(item.numero) + 1);
-    });
+    contenedor.innerHTML = "";
+    contadorFila = 1;
+    const data = JSON.parse(localStorage.getItem(`tareas_${grupoActual}`)) || [];
+    data.forEach(item => crearFila(item));
 }
 
 function renumerarFilas() {
@@ -95,3 +126,5 @@ function renumerarFilas() {
     filass.forEach((fila,index) => fila.children[0].textContent = index+1);
     contadorFila = filass.length + 1;
 }
+
+renderizarGrupos();

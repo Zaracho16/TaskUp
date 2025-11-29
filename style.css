@@ -91,3 +91,38 @@ input.nota-fila {
     text-decoration: line-through;
     opacity: 0.5;
 }
+
+/* Estilo por grupos */
+.grupos-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    justify-content: center; 
+}
+
+
+.grupo-card {
+    background: linear-gradient(135deg, #e0ffe0, #b7ffb7);
+    border: 3px solid rgb(6, 107, 94);
+    height: 18rem;
+    width: 18rem;
+    padding: 15px 20px;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.grupo-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 8px 16px rgba(206, 24, 24, 0.15);
+}
+
+.grupo-card h3 {
+    text-align: center;
+}
+
+#seccionTareas {
+    display: none;
+}
+
