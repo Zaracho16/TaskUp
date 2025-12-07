@@ -5,9 +5,48 @@ const contenedor = document.getElementById('contenedor-filas');
 let grupos = ["universidad", "trabajo", "personal"];
 let grupoActual = null;
 
+    /* Agregar un nuevo grupo */
+    const btnAgregarGrupo = document.querySelector('.img-addGruposTareas');
+    const contenedorCreacionNuevoGrupo = document.querySelector('.creacionNuevoGrupo')
+
+    btnAgregarGrupo.addEventListener('click', () => {
+
+        if(contenedorCreacionNuevoGrupo.style.display === 'none') {
+            contenedorCreacionNuevoGrupo.style.display = 'flex';
+        } else {
+            contenedorCreacionNuevoGrupo.style.display = 'none';
+        }
+        
+    });
+
+    const nuevoGrupo = document.querySelector('.inputNuevoGrupo');
+    const btnNuevoGrupo = document.getElementById('btn-CrearGrupo');
+    const mensajeGrupoAgregado = document.getElementById('mensajeGrupoAgregado');
+
+    btnNuevoGrupo.addEventListener('click', () => {
+        const nombre = nuevoGrupo.value.trim();
+        
+        if(nombre !== "") {
+            grupos.push(nombre);
+            renderizarGrupos();
+            contenedorCreacionNuevoGrupo.style.display = 'none';
+            mensajeGrupoAgregado.style.display = 'flex';
+            setTimeout(()=> mensajeGrupoAgregado.style.display='none',1000);
+        }
+        nuevoGrupo.value = ""; // se limpia el input
+    });
+
+    // al apretar afuera del modal se
+    contenedorCreacionNuevoGrupo.addEventListener('click', (e) => {
+    if (e.target === contenedorCreacionNuevoGrupo) {
+        contenedorCreacionNuevoGrupo.style.display = 'none';
+    }
+
+});
 
 const gruposContenedor = document.getElementById('gruposContenedor');
 const seccionTareas = document.getElementById('seccionTareas');
+const gruposTareas = document.querySelector('.contain-addGruposTareas');
 
 function renderizarGrupos() {
     gruposContenedor.innerHTML = "";
@@ -29,6 +68,8 @@ function seleccionarGrupo(grupo) {
 
     gruposContenedor.style.display = "none";
     seccionTareas.style.display = "block";
+
+    gruposTareas.style.display = 'none';
     
     localStorage.setItem('grupoActual', grupo);
     cargarDesdeLocal();
@@ -132,6 +173,7 @@ iconoBack.addEventListener('click', () => {
     gruposContenedor.style.display = 'flex';
     localStorage.removeItem('grupoActual');
     document.getElementById('tituloGrupoTareas').textContent = "Grupo de tareas";
+    gruposTareas.style.display = 'flex';
 });
 
 renderizarGrupos();

@@ -87,6 +87,36 @@ input.nota-fila {
     transition: opacity 0.3s ease-in-out;
 }
 
+.cMensajeGrupoAgregado {
+    background-color: #34df5c;
+    padding: 6px;
+    width: 8.6rem;
+    text-align: center;
+    border-radius: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70%;
+    position: fixed;
+    z-index: 400;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.creacionNuevoGrupo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
 .contenedor-filas-t {
     text-decoration: line-through;
     opacity: 0.5;
@@ -136,4 +166,48 @@ input.nota-fila {
 
 .estilo-volverGrupos:hover {
     transform: scale(1.2);
+}
+
+.contain-addGruposTareas {
+    border: 3px solid green;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.img-addGruposTareas {
+    cursor: pointer;
+}
+
+.addGruposTareas {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Estilo en la creacion de un nuevo grupo */
+.contain-creacionNuevoGrupo {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+#btn-CrearGrupo {
+    all: unset;
+    margin-top: 19px;
+    border-radius: 30px;
+    text-decoration: none;
+    padding: 10px;
+    width: 110px;
+    background-color: #34df5c;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.contain-creacionNuevoGrupo h4 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
 }
