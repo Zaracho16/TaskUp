@@ -2,7 +2,7 @@
 const botonAgregar = document.getElementById('idAgregarTarea');
 const contenedor = document.getElementById('contenedor-filas');
 
-let grupos = ["universidad", "trabajo", "personal"];
+grupos = JSON.parse(localStorage.getItem('grupos')) || ["universidad", "trabajo", "personal"];
 let grupoActual = null;
 
     /* Agregar un nuevo grupo */
@@ -28,6 +28,7 @@ let grupoActual = null;
         
         if(nombre !== "") {
             grupos.push(nombre);
+            localStorage.setItem('grupos', JSON.stringify(grupos));
             renderizarGrupos();
             contenedorCreacionNuevoGrupo.style.display = 'none';
             mensajeGrupoAgregado.style.display = 'flex';
@@ -48,17 +49,55 @@ const gruposContenedor = document.getElementById('gruposContenedor');
 const seccionTareas = document.getElementById('seccionTareas');
 const gruposTareas = document.querySelector('.contain-addGruposTareas');
 
+let grupoAEliminar = null;
+
 function renderizarGrupos() {
     gruposContenedor.innerHTML = "";
     grupos.forEach(grupo => {
+        const grupoWrapper = document.createElement("div");
+        grupoWrapper.classList.add("grupo-wrapper");
+
         const card = document.createElement("div");
         card.classList.add("grupo-card");
         card.dataset.grupo = grupo;
-        card.innerHTML = `<h3>${grupo}</h3>`
+        card.innerHTML = `<h3>${grupo}</h3>`;
         card.addEventListener("click", () => seleccionarGrupo(grupo));
-        gruposContenedor.appendChild(card);
+
+        const botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "Eliminar grupo";
+        botonEliminar.classList.add("boton-eliminar-grupo");
+
+        botonEliminar.addEventListener("click", (e) => {
+            e.stopPropagation();
+            grupoAEliminar = grupo; // guardamos temporalmente
+            document.getElementById('mensajeEliminarGrupo').style.display = 'block';
+        });
+
+        grupoWrapper.appendChild(card);
+        grupoWrapper.appendChild(botonEliminar);
+        gruposContenedor.appendChild(grupoWrapper);
     });
 }
+
+// Botones del modal
+const confirmarEliminar = document.getElementById('confirmarEliminar');
+const cancelarEliminar = document.getElementById('cancelarEliminar');
+
+confirmarEliminar.addEventListener('click', () => {
+    if(grupoAEliminar) {
+        grupos = grupos.filter(g => g !== grupoAEliminar);
+        localStorage.setItem('grupos', JSON.stringify(grupos));
+        renderizarGrupos();
+        grupoAEliminar = null;
+    }
+    document.getElementById('mensajeEliminarGrupo').style.display = 'none';
+});
+
+cancelarEliminar.addEventListener('click', () => {
+    grupoAEliminar = null;
+    document.getElementById('mensajeEliminarGrupo').style.display = 'none';
+});
+
 
 function seleccionarGrupo(grupo) {
     grupoActual = grupo;
